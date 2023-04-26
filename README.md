@@ -21,7 +21,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -149,7 +148,13 @@ To run tests, run the following command:
 
 
 👤 **Benjamin**
- *[Developer: Benjamin Matembe]*
+- GitHub: [@BenjaminMatembe](https://github.com/BenjaminMatembe)
+ 
+ 👤 **Gabriel Rozas**
+
+- GitHub: [@EmiLoKiJu](https://github.com/EmiLoKiJu)
+- Twitter: [@GabrielRozas12](https://twitter.com/GabrielRozas12)
+- LinkedIn: [grozas](https://www.linkedin.com/in/grozas/)
 
 - GitHub: [@githubhandle](https://github.com/BenjaminMatembe)
 
