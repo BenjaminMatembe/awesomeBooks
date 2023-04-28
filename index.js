@@ -1,63 +1,50 @@
+const stored = localStorage.getItem('storedBooks');
+let books = JSON.parse(stored) || [];
 const form = document.querySelector('.form');
-const bookListed = document.querySelector('div');
-const deleteButton = document.getElementsByClassName('remove');
-let booksList = [];
+const booksDisplayed = document.querySelector('.books_displayed');
+let filtering;
 
-// function creating html
+// display books
 
-const createHtml = () => {
-  localStorage.setItem('storedBooks', JSON.stringify(booksList));
-  bookListed.innerHTML = '';
-  booksList.forEach((book) => {
-    const item = document.createElement('ul');
-    item.innerHTML = `<li>${book.title} <br/> ${book.author} <br/> <button class="remove">Remove</button></li>`;
-    item.style.listStyle = 'none';
-    bookListed.appendChild(item);
+const showBooks = () => {
+  booksDisplayed.innerHTML = '';
+  books.forEach((book) => {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `<br/><h1>${book.title}</h2> <br/> <br/> <h3>${book.author}</h3> <br/>`;
+    const deletingBtn = document.createElement('button');
+    deletingBtn.addEventListener('click', () => { filtering(book); });
+    deletingBtn.textContent = 'Remove';
+    deletingBtn.classList.add('remove');
+    booksDisplayed.appendChild(listItem);
+    booksDisplayed.appendChild(deletingBtn);
   });
 };
+showBooks();
 
-// initialisation
-
-if (JSON.parse(localStorage.getItem('storedBooks'))) {
-  booksList = JSON.parse(localStorage.getItem('storedBooks'));
-} else {
-  createHtml();
-}
-
-// function to add book to list
-
-const addBookToList = () => {
-  createHtml();
-};
-addBookToList();
-
-// form event listener to push book to list
-
-form.addEventListener('submit', () => {
+// adding new book
+const addBook = () => {
   const addedBook = {
     title: form.title.value,
     author: form.author.value,
     id: Math.floor(Math.random() * 88),
   };
-  booksList.push(addedBook);
-  localStorage.setItem('storedBooks', JSON.stringify(booksList));
-  addBookToList();
+  books.push(addedBook);
+  localStorage.setItem('storedBooks', JSON.stringify(books));
+  showBooks();
+};
+
+// form eventListener to add book on submit
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  addBook();
+  form.title.value = '';
+  form.author.value = '';
 });
 
-// function to delete book from list
+// deleting a book
 
-const deleteBook = () => {
-  const bookToRemove = (index) => {
-    booksList.splice(index, 1);
-    localStorage.setItem('storedBooks', JSON.stringify(booksList));
-    addBookToList();
-    deleteBook();
-  };
-
-  for (let i = 0; i < deleteButton.length; i += 1) {
-    deleteButton[i].onclick = () => {
-      bookToRemove(i);
-    };
-  }
+filtering = (book) => {
+  books = books.filter((id) => id !== book);
+  localStorage.setItem('storedBooks', JSON.stringify(books));
+  showBooks();
 };
-deleteBook();
